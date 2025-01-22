@@ -24,10 +24,20 @@ class Tests(unittest.TestCase):
         entrance_wall = self.m1._cells[0][0].has_top_wall
         self.assertFalse(entrance_wall)
 
-    def test_break_exit(self):
-        self.m1._break_entrance_and_exit()
         exit_wall = self.m1._cells[self.num_cols - 1][self.num_rows - 1].has_bottom_wall
         self.assertFalse(exit_wall)
+
+    def test_reset_cells(self):
+        self.m1._break_entrance_and_exit()
+        self.m1._break_walls_r(0, 0)
+        self.m1._reset_cells_visited()
+
+        visited = []
+        for i in range(self.m1._num_cols):
+            for j in range(self.m1._num_rows):
+                visited.append(self.m1._cells[i][j].visited)
+
+        self.assertNotIn(True, visited)
 
 
 if __name__ == "__main__":
