@@ -12,6 +12,7 @@ class Cell:
         self.has_top_wall = True
         self.has_bottom_wall = True
         self._win = win
+        self.visited = False
 
     def draw(self, x1, y1, x2, y2):
         if self._win is None:
@@ -38,6 +39,8 @@ class Cell:
         self._win.draw_line(line, fill)
 
     def draw_move(self, to_cell, undo=False):
+        if self._win is None:
+            return
         fill_color = "gray" if undo else "red"
 
         point_a = self.get_center_point()
