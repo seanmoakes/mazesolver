@@ -14,6 +14,9 @@ class Window:
         self.__root.update_idletasks()
         self.__root.update()
 
+    def draw_line(self, line, fill_color):
+        line.draw(self.__canvas, fill_color)
+
     def wait_for_close(self):
         self.__running = True
         while self.__running:
@@ -22,3 +25,25 @@ class Window:
 
     def close(self):
         self.__running = False
+
+
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+
+class Line:
+    def __init__(self, start, end):
+        self.__point_a = start
+        self.__point_b = end
+
+    def draw(self, canvas, fill_color):
+        canvas.create_line(
+            self.__point_a.x,
+            self.__point_a.y,
+            self.__point_b.x,
+            self.__point_b.y,
+            fill=fill_color,
+            width=2,
+        )
